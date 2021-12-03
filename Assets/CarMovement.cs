@@ -1,43 +1,68 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
+[System.Serializable]
+public class AxleInfo
+{
+    public WheelCollider leftWheel;
+    public WheelCollider rightWheel;
+    public bool motor;
+    public bool steering;
+}
 
 public class CarMovement : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Transform car;
-    public float speed = 17;
+    public List<AxleInfo> axleInfos;
+    public float maxMotorTorque;
+    public float maxSteeringAngle;
 
-
-    Vector3 rotationRight = new Vector3(0, 30, 0);
-    Vector3 rotationLeft = new Vector3(0, -30, 0);
-
-    Vector3 forward = new Vector3(0, 0, 1);
-    Vector3 backward = new Vector3(0, 0, -1);
-
-    void FixedUpdate()
+    // finds the corresponding visual wheel
+    // correctly applies the transform
+    public void ApplyLocalPositionToVisuals(WheelCollider collider)
     {
-        if (Input.GetKey("w"))
+        if (collider.transform.childCount == 0)
         {
-            transform.Translate(forward * speed * Time.deltaTime);
-        }
-        if (Input.GetKey("s"))
-        {
-            transform.Translate(backward * speed * Time.deltaTime);
+            return;
         }
 
-        if (Input.GetKey("d"))
-        {
-            Quaternion deltaRotationRight = Quaternion.Euler(rotationRight * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotationRight);
-        }
+        Transform visualWheel = collider.transform.GetChild(0);
 
-        if (Input.GetKey("a"))
-        {
-            Quaternion deltaRotationLeft = Quaternion.Euler(rotationLeft * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotationLeft);
-        }
+        Vector3 position;
+        Quaternion rotation;
+        collider.GetWorldPose(out position, out rotation);
 
+        visualWheel.transform.position = position;
+        visualWheel.transform.rotation = rotation;
+    }
+
+    void Update()
+    {
+        if (Input.GetKey("space"))
+        {
+            transform.Rotate(0, 0, 180);
+        }
+    }
+
+    public void FixedUpdate()
+    {
+        float motor = maxMotorTorque * Input.GetAxis("Vertical");
+        float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
+
+        foreach (AxleInfo axleInfo in axleInfos)
+        {
+            if (axleInfo.steering)
+            {
+                axleInfo.leftWheel.steerAngle = steering;
+                axleInfo.rightWheel.steerAngle = steering;
+            }
+            if (axleInfo.motor)
+            {
+                axleInfo.leftWheel.motorTorque = motor;
+                axleInfo.rightWheel.motorTorque = motor;
+            }
+            ApplyLocalPositionToVisuals(axleInfo.leftWheel);
+            ApplyLocalPositionToVisuals(axleInfo.rightWheel);
+        }
     }
 }
-
