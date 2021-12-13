@@ -38,9 +38,12 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey("space"))
+        if (transform.rotation.eulerAngles.z <= 350 && transform.rotation.eulerAngles.z >= 10)
         {
-            transform.Rotate(0, 0, 180);
+            if (Input.GetKey("space"))
+            {
+                transform.Rotate(0, 0, -transform.rotation.eulerAngles.z);
+            }
         }
     }
 
