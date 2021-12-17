@@ -11616,10 +11616,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SportCar2
       objectReference: {fileID: 0}
-    - target: {fileID: 693955431062033897, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.5998
@@ -11663,10 +11659,6 @@ PrefabInstance:
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 693955431062033902, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-      propertyPath: m_Constraints
-      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
