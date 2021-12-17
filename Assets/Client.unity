@@ -2398,11 +2398,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c92bea14e5c4591408be760558da7b90, type: 3}
   m_PrefabInstance: {fileID: 348952300}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &354733236 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693955431176904762, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-  m_PrefabInstance: {fileID: 693955430745553075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &358276824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5791,11 +5786,6 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
---- !u!4 &935117037 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693955431795092982, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-  m_PrefabInstance: {fileID: 693955430745553075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &943721063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6304,16 +6294,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a348757a645010844b6c326febbd4bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontLeftWheelCollider: {fileID: 916394334}
-  frontRightWheelCollider: {fileID: 547531651}
-  rearLeftWheelCollider: {fileID: 2018837070}
-  rearRightWheelCollider: {fileID: 1201400676}
-  frontLeftWheelTransform: {fileID: 935117037}
-  frontRightWheelTransform: {fileID: 1195172775}
-  rearLeftWheelTransform: {fileID: 354733236}
-  rearRightWheelTransform: {fileID: 1304719718}
+  frontLeftWheelCollider: {fileID: 0}
+  frontRightWheelCollider: {fileID: 0}
+  rearLeftWheelCollider: {fileID: 0}
+  rearRightWheelCollider: {fileID: 0}
+  frontLeftWheelTransform: {fileID: 0}
+  frontRightWheelTransform: {fileID: 0}
+  rearLeftWheelTransform: {fileID: 0}
+  rearRightWheelTransform: {fileID: 0}
   maxSteeringAngle: 30
-  motorForce: 500
+  motorForce: 50
   brakeForce: 0
 --- !u!1001 &1004346310
 PrefabInstance:
@@ -7156,11 +7146,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 11786ea4822f6214397607504b10357d, type: 3}
   m_PrefabInstance: {fileID: 759196500}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1195172775 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693955431582700076, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-  m_PrefabInstance: {fileID: 693955430745553075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1201400675
 GameObject:
   m_ObjectHideFlags: 0
@@ -7635,11 +7620,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 28076010641c5a64594a63a738cfef62, type: 3}
   m_PrefabInstance: {fileID: 1304479085}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1304719718 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693955430517889185, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-  m_PrefabInstance: {fileID: 693955430745553075}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1348540762
 PrefabInstance:
@@ -11401,6 +11381,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11786ea4822f6214397607504b10357d, type: 3}
+--- !u!1 &2109748186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2109748187}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2109748187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109748186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 57.73205, y: -10.66421, z: -141.98242}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2112682898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11938,6 +11948,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 568761488, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 693955430517889212, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_Enabled
       value: 0
