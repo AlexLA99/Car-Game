@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
@@ -15,6 +16,7 @@ public class Server_Test : MonoBehaviour
     private object logLock = new object();
     string newText;
     bool textToLog = false;
+    int playerID = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -68,10 +70,11 @@ public class Server_Test : MonoBehaviour
                 ThreadLogText("Recieved " + recieved);
                 if (recieved == "Ping")
                 {
-                    Debug.Log("Sending Pong back");
-                    ThreadLogText("Sending Pong back");
-                    data = Encoding.ASCII.GetBytes("Pong");
+                    Debug.Log("Sending Pong back" + playerID);
+                    ThreadLogText("Sending Pong back" + playerID);
+                    data = BitConverter.GetBytes(playerID);
                     serverSocket.SendTo(data, data.Length, SocketFlags.None, remote);
+                    ++playerID;
                 }
                 else if (recieved == "exit")
                 {

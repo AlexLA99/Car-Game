@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 using UnityEngine.UI;
+using System;
 
 public class Client_Test : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Client_Test : MonoBehaviour
     private object logLock = new object();
     string newText;
     bool textToLog = false;
+
+    [HideInInspector]
+    public int playerId;
 
     // Start is called before the first frame update
     void Start()
@@ -79,25 +83,38 @@ public class Client_Test : MonoBehaviour
             {
                 data = new byte[1024];
                 int reciv = connectionSocket.ReceiveFrom(data, ref remote);
-                string recieved = Encoding.ASCII.GetString(data, 0, reciv);
+                int recieved = BitConverter.ToInt32(data, 0);
                 Debug.Log("Recieved " + recieved);
                 ThreadLogText("Recieved " + recieved);
                 System.DateTime localDate2 = System.DateTime.Now;
                 ThreadLogText("Client-Server ping: " + (localDate2.Millisecond - localDate.Millisecond).ToString());
-                if (recieved == "Pong")
+                playerId = recieved;
+
+                //if (recieved == "exit")
+                //{
+                //    Debug.Log("Exit Message recieved");
+                //    ThreadLogText("Exit Message recieved");
+                //    break;
+                //}
+                //else
+                //{
+                // Check time it takes to receive
+                if (recieved == 1 || recieved == 2)
                 {
-                    // Check time it takes to receive
                     Debug.Log("Connection Established with a delay of " + (localDate2.Millisecond - localDate.Millisecond).ToString() + " milliseconds");
                     ThreadLogText("Connection Established");
                     data = Encoding.ASCII.GetBytes("Nice");
                     connectionSocket.SendTo(data, data.Length, SocketFlags.None, remote);
+                    
                 }
-                else if (recieved == "exit")
+                else
                 {
                     Debug.Log("Exit Message recieved");
                     ThreadLogText("Exit Message recieved");
                     break;
                 }
+                //}
+
             }
             catch (SocketException e)
             {
