@@ -8,6 +8,7 @@ public class CountDown : MonoBehaviour
     public GameObject countdown;
     public GameObject LapTimer;
     public GameObject CarControls;
+    public CarMovement car;
 
     void Start()
     {
@@ -29,7 +30,13 @@ public class CountDown : MonoBehaviour
         countdown.SetActive(true);
         yield return new WaitForSeconds(1);
         countdown.SetActive(false);
+        countdown.GetComponent<Text>().text = "GO";
+        countdown.SetActive(true);
         LapTimer.SetActive(true);
         CarControls.SetActive(true);
+        car.motorForce = 1000f;
+        yield return new WaitForSeconds(1);
+        countdown.SetActive(false);
+
     }
 }

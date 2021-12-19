@@ -10,16 +10,21 @@ public class CarMovement : MonoBehaviour
     private float steerAngle;
     private bool isBreaking;
 
-    public WheelCollider frontLeftWheelCollider;
-    public WheelCollider frontRightWheelCollider;
-    public WheelCollider rearLeftWheelCollider;
-    public WheelCollider rearRightWheelCollider;
-    public Transform frontLeftWheelTransform;
-    public Transform frontRightWheelTransform;
-    public Transform rearLeftWheelTransform;
-    public Transform rearRightWheelTransform;
+    [System.Serializable]
+    public struct CarInfo
+    {
+        public int carId;
+        public WheelCollider frontLeftWheelCollider;
+        public WheelCollider frontRightWheelCollider;
+        public WheelCollider rearLeftWheelCollider;
+        public WheelCollider rearRightWheelCollider;
+        public Transform frontLeftWheelTransform;
+        public Transform frontRightWheelTransform;
+        public Transform rearLeftWheelTransform;
+        public Transform rearRightWheelTransform;
+    };
 
-    public int carId;
+    public CarInfo carInfo;
     public float maxSteeringAngle = 30f;
     public float motorForce = 50f;
     public float brakeForce = 0f;
@@ -53,28 +58,28 @@ public class CarMovement : MonoBehaviour
     private void HandleSteering()
     {
         steerAngle = maxSteeringAngle * horizontalInput;
-        frontLeftWheelCollider.steerAngle = steerAngle;
-        frontRightWheelCollider.steerAngle = steerAngle;
+        carInfo.frontLeftWheelCollider.steerAngle = steerAngle;
+        carInfo.frontRightWheelCollider.steerAngle = steerAngle;
     }
 
     private void HandleMotor()
     {
-        frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
-        frontRightWheelCollider.motorTorque = verticalInput * motorForce;
+        carInfo.frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
+        carInfo.frontRightWheelCollider.motorTorque = verticalInput * motorForce;
 
         brakeForce = isBreaking ? 3000f : 0f;
-        frontLeftWheelCollider.brakeTorque = brakeForce;
-        frontRightWheelCollider.brakeTorque = brakeForce;
-        rearLeftWheelCollider.brakeTorque = brakeForce;
-        rearRightWheelCollider.brakeTorque = brakeForce;
+        carInfo.frontLeftWheelCollider.brakeTorque = brakeForce;
+        carInfo.frontRightWheelCollider.brakeTorque = brakeForce;
+        carInfo.rearLeftWheelCollider.brakeTorque = brakeForce;
+        carInfo.rearRightWheelCollider.brakeTorque = brakeForce;
     }
 
     private void UpdateWheels()
     {
-        UpdateWheelPos(frontLeftWheelCollider, frontLeftWheelTransform);
-        UpdateWheelPos(frontRightWheelCollider, frontRightWheelTransform);
-        UpdateWheelPos(rearLeftWheelCollider, rearLeftWheelTransform);
-        UpdateWheelPos(rearRightWheelCollider, rearRightWheelTransform);
+        UpdateWheelPos(carInfo.frontLeftWheelCollider, carInfo.frontLeftWheelTransform);
+        UpdateWheelPos(carInfo.frontRightWheelCollider, carInfo.frontRightWheelTransform);
+        UpdateWheelPos(carInfo.rearLeftWheelCollider, carInfo.rearLeftWheelTransform);
+        UpdateWheelPos(carInfo.rearRightWheelCollider, carInfo.rearRightWheelTransform);
     }
 
     private void UpdateWheelPos(WheelCollider wheelCollider, Transform trans)
