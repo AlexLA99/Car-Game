@@ -19,6 +19,7 @@ public class CarMovement : MonoBehaviour
     public Transform rearLeftWheelTransform;
     public Transform rearRightWheelTransform;
 
+    public int carId;
     public float maxSteeringAngle = 30f;
     public float motorForce = 50f;
     public float brakeForce = 0f;
