@@ -12,6 +12,7 @@ public class CountDown : MonoBehaviour
 
     void Start()
     {
+        car.motorForce = 0;
         StartCoroutine(CountStart());
     }
 

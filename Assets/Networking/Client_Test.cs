@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 using UnityEngine.UI;
-using System;
+using Assets.Networking;
 
 public class Client_Test : MonoBehaviour
 {
@@ -18,6 +18,12 @@ public class Client_Test : MonoBehaviour
     private object logLock = new object();
     string newText;
     bool textToLog = false;
+    public CarMovement[] Cars = new CarMovement[2];
+    public CarMovement.PassInfo car1Info;
+    public CarMovement.PassInfo car2Info;
+    public CameraSetter CameraSetter;
+
+    bool needsConnect = false;
 
     [HideInInspector]
     public int playerId;
@@ -25,9 +31,9 @@ public class Client_Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        OutputLog.text = "";
+        //OutputLog.text = "";
         connectionSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9051);
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 0);
         connectionSocket.Bind(ipep);
         listeningThread = new Thread(Connection);
         listeningThread.IsBackground = true;
@@ -37,6 +43,11 @@ public class Client_Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (needsConnect)
+        {
+            CameraSetter.SetCar(Cars[playerId - 1].gameObject);
+            needsConnect = false;
+        }
         bool quitting = false;
         lock (quitLock)
         {
@@ -49,7 +60,7 @@ public class Client_Test : MonoBehaviour
         
         lock (logLock)
         {
-            if (textToLog)
+            if (textToLog && OutputLog != null)
             {
                 OutputLog.text += newText;
                 newText = "";
@@ -61,34 +72,39 @@ public class Client_Test : MonoBehaviour
     void OnDestroy()
     {
         SendCloseMessage();
-        listeningThread.Join();
         connectionSocket.Shutdown(SocketShutdown.Both);
         connectionSocket.Close();
+        listeningThread.Join();
         Debug.Log("Bye :)");
     }
     private void Connection()
     {
-        IPEndPoint serverIpep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
+        EndPoint serverIpep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
         IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 0);
         EndPoint remote = (EndPoint)ipep;
 
         Debug.Log("Sending first ping");
-        ThreadLogText("Sending first ping");
+        //ThreadLogText("Sending first ping");
         System.DateTime localDate = System.DateTime.Now;
-        byte[] data = Encoding.ASCII.GetBytes("Ping");
+        Message pingMessage = new Message();
+        pingMessage.message = "Ping";
+        byte[] data = pingMessage.Serialize();
         connectionSocket.SendTo(data, data.Length, SocketFlags.None, serverIpep);
         while (true)
         {
             try
             {
                 data = new byte[1024];
-                int reciv = connectionSocket.ReceiveFrom(data, ref remote);
-                int recieved = BitConverter.ToInt32(data, 0);
-                Debug.Log("Recieved " + recieved);
-                ThreadLogText("Recieved " + recieved);
+                int reciv = connectionSocket.ReceiveFrom(data, ref serverIpep);
+                Message message = new Message();
+                message.Deserialize(data);
+                //int recieved = BitConverter.ToInt32(data, 0);
+                //string recieved2 = Encoding.ASCII.GetString(data, 0, reciv);
+                //Debug.Log("Recieved " + message.message);
+                //ThreadLogText("Recieved " + recieved);
                 System.DateTime localDate2 = System.DateTime.Now;
-                ThreadLogText("Client-Server ping: " + (localDate2.Millisecond - localDate.Millisecond).ToString());
-                playerId = recieved;
+                //ThreadLogText("Client-Server ping: " + (localDate2.Millisecond - localDate.Millisecond).ToString());
+                
 
                 //if (recieved == "exit")
                 //{
@@ -99,21 +115,40 @@ public class Client_Test : MonoBehaviour
                 //else
                 //{
                 // Check time it takes to receive
-                if (recieved == 1 || recieved == 2)
+                if (message.message == "Pong")
                 {
+                    playerId = message.playerId;
                     Debug.Log("Connection Established with a delay of " + (localDate2.Millisecond - localDate.Millisecond).ToString() + " milliseconds");
                     ThreadLogText("Connection Established");
-                    data = Encoding.ASCII.GetBytes("Nice");
-                    connectionSocket.SendTo(data, data.Length, SocketFlags.None, remote);
+                    needsConnect = true;
+
+                    data = Cars[playerId - 1].data;
+
+                    Message toSend = new Message();
+                    toSend.playerId = playerId;
+                    toSend.payload = data;
+                    data = toSend.Serialize();
+                    connectionSocket.SendTo(data, data.Length, SocketFlags.None, serverIpep);
                     
                 }
-                else
+                else if (message.message == "exit")
                 {
                     Debug.Log("Exit Message recieved");
                     ThreadLogText("Exit Message recieved");
                     break;
                 }
-                //}
+                else
+                {
+                    Cars[message.playerId - 1].serverData = message.payload;
+                    data = Cars[playerId - 1].data;
+
+                    Message toSend = new Message();
+                    toSend.playerId = playerId;
+                    toSend.payload = data;
+                    data = toSend.Serialize();
+                    connectionSocket.SendTo(data, data.Length, SocketFlags.None, serverIpep);
+                }
+                
 
             }
             catch (SocketException e)
@@ -157,4 +192,5 @@ public class Client_Test : MonoBehaviour
             newText += System.Environment.NewLine + text;
         }
     }
+
 }

@@ -556,17 +556,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a348757a645010844b6c326febbd4bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontLeftWheelCollider: {fileID: 916394334}
-  frontRightWheelCollider: {fileID: 547531651}
-  rearLeftWheelCollider: {fileID: 2018837070}
-  rearRightWheelCollider: {fileID: 1201400676}
-  frontLeftWheelTransform: {fileID: 693955431795092982}
-  frontRightWheelTransform: {fileID: 693955431582700076}
-  rearLeftWheelTransform: {fileID: 693955431176904762}
-  rearRightWheelTransform: {fileID: 693955430517889185}
+  carInfo:
+    carId: 2
+    frontLeftWheelCollider: {fileID: 916394334}
+    frontRightWheelCollider: {fileID: 547531651}
+    rearLeftWheelCollider: {fileID: 2018837070}
+    rearRightWheelCollider: {fileID: 1201400676}
+    frontLeftWheelTransform: {fileID: 693955431795092982}
+    frontRightWheelTransform: {fileID: 693955431582700076}
+    rearLeftWheelTransform: {fileID: 693955431176904762}
+    rearRightWheelTransform: {fileID: 693955430517889185}
   maxSteeringAngle: 30
-  motorForce: 1000
-  brakeForce: 100
+  motorForce: 0
+  brakeForce: 300
 --- !u!1 &693955431176904758
 GameObject:
   m_ObjectHideFlags: 0
