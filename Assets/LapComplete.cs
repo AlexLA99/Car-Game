@@ -7,6 +7,8 @@ public class LapComplete : MonoBehaviour
 {
     public GameObject LapCompleteTrig;
     public GameObject HalfLapTrig;
+    public GameObject FirstLapTrigger;
+    public GameObject LastLapTrigger;
 
     public GameObject MinuteDisplay;
     public GameObject SecondDisplay;
@@ -53,6 +55,8 @@ public class LapComplete : MonoBehaviour
 
         HalfLapTrig.SetActive(true);
         LapCompleteTrig.SetActive(true);
+        FirstLapTrigger.SetActive(true);
+        LastLapTrigger.SetActive(true);
     }
 
 }

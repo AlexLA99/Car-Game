@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HalfPointTrigger : MonoBehaviour
+public class LastPointTrigger : MonoBehaviour
 {
     public GameObject LapCompleteTrig;
     public GameObject HalfLapTrig;
@@ -13,7 +13,7 @@ public class HalfPointTrigger : MonoBehaviour
     {
         LapCompleteTrig.SetActive(true);
         HalfLapTrig.SetActive(false);
-        FirstLapTrigger.SetActive(true);
-        LastLapTrigger.SetActive(true);
+        FirstLapTrigger.SetActive(false);
+        LastLapTrigger.SetActive(false);
     }
 }
