@@ -208,4 +208,9 @@ public class CarMovement : MonoBehaviour
         return str;
     }
 
+    public void Position()
+    {
+
+    }
+
 }
