@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 
 public class CarMovement : MonoBehaviour
 {
-    private float horizontalInput;
-    private float verticalInput;
+    
     private float steerAngle;
+    private int positionCountDown = 0;
     
 
     [System.Serializable]
@@ -30,21 +30,15 @@ public class CarMovement : MonoBehaviour
     public struct PassInfo
     {
         public int carId;
-        public float frontLeftWheelColliderSteerAngle;
-        public float frontLeftWheelColliderMotorTorque;
-        public float frontLeftWheelColliderBrakeTorque;
-
-        public float frontRightWheelColliderMotorTorque;
-        public float frontRightWheelColliderBrakeTorque;
-        public float frontRightWheelColliderSteerAngle;
-
-        public float backLeftWheelColliderSteerAngle;
-        public float backLeftWheelColliderMotorTorque;
-        public float backLeftWheelColliderBrakeTorque;
-                    
-        public float backRightWheelColliderMotorTorque;
-        public float backRightWheelColliderBrakeTorque;
-        public float backRightWheelColliderSteerAngle;
+        public float horizontalInput;
+        public float verticalInput;
+        public float carTransformX;
+        public float carTransformY;
+        public float carTransformZ;
+        public float carTransformRotX;
+        public float carTransformRotY;
+        public float carTransformRotZ;
+        public float carTransformRotW;
 
         [HideInInspector]
         public bool isBreaking;
@@ -72,21 +66,16 @@ public class CarMovement : MonoBehaviour
             }
         }
 
-        passInfo.frontLeftWheelColliderSteerAngle = carInfo.frontLeftWheelCollider.steerAngle;
-        passInfo.frontLeftWheelColliderMotorTorque = carInfo.frontLeftWheelCollider.motorTorque;
-        passInfo.frontLeftWheelColliderBrakeTorque = carInfo.frontLeftWheelCollider.brakeTorque;
-        
-        passInfo.frontRightWheelColliderSteerAngle = carInfo.frontRightWheelCollider.steerAngle;
-        passInfo.frontRightWheelColliderMotorTorque = carInfo.frontRightWheelCollider.motorTorque;
-        passInfo.frontRightWheelColliderBrakeTorque = carInfo.frontRightWheelCollider.brakeTorque;
-      
-        passInfo.backLeftWheelColliderSteerAngle = carInfo.rearLeftWheelCollider.steerAngle;
-        passInfo.backLeftWheelColliderMotorTorque = carInfo.rearLeftWheelCollider.motorTorque;
-        passInfo.backLeftWheelColliderBrakeTorque= carInfo.rearLeftWheelCollider.brakeTorque;
-        
-        passInfo.backRightWheelColliderSteerAngle = carInfo.rearRightWheelCollider.steerAngle;
-        passInfo.backRightWheelColliderMotorTorque = carInfo.rearRightWheelCollider.motorTorque;
-        passInfo.backRightWheelColliderBrakeTorque = carInfo.rearRightWheelCollider.brakeTorque;
+        passInfo.carTransformX = transform.position.x;
+        passInfo.carTransformY = transform.position.y;
+        passInfo.carTransformZ = transform.position.z;
+
+        passInfo.carTransformRotX = transform.rotation.x;
+        passInfo.carTransformRotY = transform.rotation.y;
+        passInfo.carTransformRotZ = transform.rotation.z;
+        passInfo.carTransformRotW = transform.rotation.w;
+
+
         passInfo.carId = carInfo.carId;
 
 
@@ -95,6 +84,13 @@ public class CarMovement : MonoBehaviour
         if (serverData != null && serverData.Length != 0)
         {
             ClientData = fromBytes(serverData);
+        }
+        ++positionCountDown;
+        if (positionCountDown >= 10 && clientCar.playerId != carInfo.carId && ClientData.carId == carInfo.carId)
+        {
+            transform.rotation = new Quaternion(ClientData.carTransformRotX, ClientData.carTransformRotY, ClientData.carTransformRotZ, ClientData.carTransformRotW);
+            transform.position = new Vector3(ClientData.carTransformX, ClientData.carTransformY, ClientData.carTransformZ);
+            positionCountDown = 0;
         }
     }
 
@@ -108,70 +104,48 @@ public class CarMovement : MonoBehaviour
 
     private void GetInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        passInfo.isBreaking = Input.GetKey(KeyCode.Space);
-    }
-
-    private void HandleSteering()
-    {
         if (clientCar.playerId == carInfo.carId)
         {
-            steerAngle = maxSteeringAngle * horizontalInput;
-            carInfo.frontLeftWheelCollider.steerAngle = steerAngle;
-            carInfo.frontRightWheelCollider.steerAngle = steerAngle;
+            passInfo.horizontalInput = Input.GetAxis("Horizontal");
+            passInfo.verticalInput = Input.GetAxis("Vertical");
+            passInfo.isBreaking = Input.GetKey(KeyCode.Space);
         }
         else if (ClientData.carId == carInfo.carId)
         {
-            carInfo.frontLeftWheelCollider.steerAngle = ClientData.frontLeftWheelColliderSteerAngle;
-            carInfo.frontRightWheelCollider.steerAngle = ClientData.frontRightWheelColliderSteerAngle;
+            passInfo.horizontalInput = ClientData.horizontalInput;
+            passInfo.verticalInput = ClientData.verticalInput;
+            passInfo.isBreaking = ClientData.isBreaking;
         }
         
     }
 
+    private void HandleSteering()
+    {
+            steerAngle = maxSteeringAngle * passInfo.horizontalInput;
+            carInfo.frontLeftWheelCollider.steerAngle = steerAngle;
+            carInfo.frontRightWheelCollider.steerAngle = steerAngle;
+    }
+
     private void HandleMotor()
     {
-        if (clientCar.playerId == carInfo.carId)
-        {
-            carInfo.frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
-            carInfo.frontRightWheelCollider.motorTorque = verticalInput * motorForce;
+            carInfo.frontLeftWheelCollider.motorTorque = passInfo.verticalInput * motorForce;
+            carInfo.frontRightWheelCollider.motorTorque = passInfo.verticalInput * motorForce;
 
             brakeForce = passInfo.isBreaking ? 3000f : 0f;
             carInfo.frontLeftWheelCollider.brakeTorque = brakeForce;
             carInfo.frontRightWheelCollider.brakeTorque = brakeForce;
             carInfo.rearLeftWheelCollider.brakeTorque = brakeForce;
             carInfo.rearRightWheelCollider.brakeTorque = brakeForce;
-        }
-        else if (ClientData.carId == carInfo.carId)
-        {
-            carInfo.frontLeftWheelCollider.motorTorque = ClientData.frontLeftWheelColliderMotorTorque;
-            carInfo.frontRightWheelCollider.motorTorque = ClientData.frontRightWheelColliderMotorTorque;
-
-            brakeForce = ClientData.isBreaking ? 3000f : 0f;
-            carInfo.frontLeftWheelCollider.brakeTorque = ClientData.frontLeftWheelColliderBrakeTorque;
-            carInfo.frontRightWheelCollider.brakeTorque = ClientData.frontRightWheelColliderBrakeTorque;
-            carInfo.rearLeftWheelCollider.brakeTorque = ClientData.backLeftWheelColliderBrakeTorque;
-            carInfo.rearRightWheelCollider.brakeTorque = ClientData.backRightWheelColliderBrakeTorque;
-        }
     }
 
     private void UpdateWheels()
     {
-        //if (clientCar.playerId == carInfo.carId)
         {
             UpdateWheelPos(carInfo.frontLeftWheelCollider, carInfo.frontLeftWheelTransform);
             UpdateWheelPos(carInfo.frontRightWheelCollider, carInfo.frontRightWheelTransform);
             UpdateWheelPos(carInfo.rearLeftWheelCollider, carInfo.rearLeftWheelTransform);
             UpdateWheelPos(carInfo.rearRightWheelCollider, carInfo.rearRightWheelTransform);
         }
-        //else
-        //{
-        //    UpdateWheelPos(clientCar.serverCar.frontLeftWheelCollider, clientCar.serverCar.frontLeftWheelTransform);
-        //    UpdateWheelPos(clientCar.serverCar.frontRightWheelCollider, clientCar.serverCar.frontRightWheelTransform);
-        //    UpdateWheelPos(clientCar.serverCar.rearLeftWheelCollider, clientCar.serverCar.rearLeftWheelTransform);
-        //    UpdateWheelPos(clientCar.serverCar.rearRightWheelCollider, clientCar.serverCar.rearRightWheelTransform);
-        //}
-        
     }
 
     private void UpdateWheelPos(WheelCollider wheelCollider, Transform trans)

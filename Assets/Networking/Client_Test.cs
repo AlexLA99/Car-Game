@@ -23,6 +23,13 @@ public class Client_Test : MonoBehaviour
     public CarMovement.PassInfo car2Info;
     public CameraSetter CameraSetter;
 
+    public GameObject countDownScript;
+    public GameObject waitingPlayers;
+    public GameObject countDownUI;
+
+    bool firstTime = true;
+    bool ready = false;
+
     bool needsConnect = false;
 
     [HideInInspector]
@@ -66,6 +73,15 @@ public class Client_Test : MonoBehaviour
                 newText = "";
                 textToLog = false;
             }
+        }
+
+        if (firstTime && ready)
+        {
+            firstTime = false;
+            waitingPlayers.SetActive(false);
+            countDownScript.SetActive(true);
+            countDownUI.SetActive(true);
+
         }
     }
 
@@ -137,8 +153,9 @@ public class Client_Test : MonoBehaviour
                     ThreadLogText("Exit Message recieved");
                     break;
                 }
-                else
+                else if (message.message == "ready")
                 {
+                    ready = true;
                     Cars[message.playerId - 1].serverData = message.payload;
                     data = Cars[playerId - 1].data;
 

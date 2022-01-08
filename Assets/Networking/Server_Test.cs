@@ -74,15 +74,27 @@ public class Server_Test : MonoBehaviour
                 //ThreadLogText("Recieved " + received.message);
                 if (received.message == "Ping")
                 {
-                    Debug.Log("Sending Pong back" + playerID);
-                    ThreadLogText("Sending Pong back" + playerID);
-                    Message pongMessage = new Message();
-                    pongMessage.playerId = playerID;
-                    pongMessage.message = "Pong";
-                    data = pongMessage.Serialize();
-                    serverSocket.SendTo(data, data.Length, SocketFlags.None, clientAddr);
-                    clients.Add(clientAddr);
-                    ++playerID;
+                    if (playerID <= 2)
+                    {
+                        Debug.Log("Sending Pong back" + playerID);
+                        ThreadLogText("Sending Pong back" + playerID);
+                        Message pongMessage = new Message();
+                        pongMessage.playerId = playerID;
+                        pongMessage.message = "Pong";
+                        data = pongMessage.Serialize();
+                        serverSocket.SendTo(data, data.Length, SocketFlags.None, clientAddr);
+                        clients.Add(clientAddr);
+                        ++playerID;
+                    }
+                    else
+                    {
+                        Message exitMessage = new Message();
+                        exitMessage.playerId = received.playerId;
+                        exitMessage.message = "exit";
+                        data = exitMessage.Serialize();
+                        serverSocket.SendTo(data, data.Length, SocketFlags.None, clientAddr);
+                    }
+                    
                 }
                 else if (received.message == "exit")
                 {
@@ -90,8 +102,13 @@ public class Server_Test : MonoBehaviour
                     ThreadLogText("Exit Message received");
                     break;
                 }
-                else
+                else if (playerID > 2)
                 {
+                    Message sendMessage = new Message();
+                    sendMessage.playerId = received.playerId;
+                    sendMessage.message = "ready";
+                    sendMessage.payload = received.payload;
+                    data = sendMessage.Serialize();
                     foreach (EndPoint client in clients)
                     {
                         serverSocket.SendTo(data, data.Length, SocketFlags.None, client);
