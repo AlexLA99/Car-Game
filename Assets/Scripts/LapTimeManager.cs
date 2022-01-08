@@ -19,7 +19,7 @@ public class LapTimeManager : MonoBehaviour
     void Update()
     {
         MilliCount += Time.deltaTime * 10;
-        RawTime += Time.deltaTime;
+        //RawTime += Time.deltaTime;
         MilliDisplay = MilliCount.ToString("F0");
         MilliBox.GetComponent<Text>().text = "" + MilliDisplay;
 

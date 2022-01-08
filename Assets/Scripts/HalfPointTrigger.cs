@@ -13,7 +13,7 @@ public class HalfPointTrigger : MonoBehaviour
     {
         LapCompleteTrig.SetActive(true);
         HalfLapTrig.SetActive(false);
-        FirstLapTrigger.SetActive(true);
+        FirstLapTrigger.SetActive(false);
         LastLapTrigger.SetActive(true);
     }
 }
