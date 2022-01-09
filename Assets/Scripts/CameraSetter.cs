@@ -12,6 +12,7 @@ public class CameraSetter : MonoBehaviour
 
     public void SetCar(GameObject car)
     {
+
         GetComponent<AutoCam>().SetTarget(car.transform);
         //GetComponent<RaceFinish>().car = car.GetComponent<CarMovement>();
         //GetComponent<RaceFinish>().CarControls = car;

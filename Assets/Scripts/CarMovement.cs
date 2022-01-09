@@ -9,7 +9,14 @@ public class CarMovement : MonoBehaviour
     
     private float steerAngle;
     private int positionCountDown = 0;
-    
+
+    public GameObject LapCompleteTrig;
+    public GameObject HalfLapTrig;
+    public GameObject FirstLapTrigger;
+    public GameObject LastLapTrigger;
+
+    public Vector3 CheckPointPos;
+    public Quaternion CheckpointRot;
 
     [System.Serializable]
     [StructLayout(LayoutKind.Sequential)]
@@ -58,13 +65,12 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
-        if (transform.rotation.eulerAngles.z <= 350 && transform.rotation.eulerAngles.z >= 10)
+        
+        if (Input.GetKey(KeyCode.R))
         {
-            if (Input.GetKey("space"))
-            {
-                transform.Rotate(0, 0, -transform.rotation.eulerAngles.z);
-            }
+            LastCheckpoint();
         }
+        
 
         passInfo.carTransformX = transform.position.x;
         passInfo.carTransformY = transform.position.y;
@@ -182,9 +188,31 @@ public class CarMovement : MonoBehaviour
         return str;
     }
 
-    public void Position()
+    public void LastCheckpoint()
     {
 
-    }
+        if (!FirstLapTrigger.active && HalfLapTrig.active && LastLapTrigger && LapCompleteTrig)
+        {
+            CheckPointPos = new Vector3(-176.68f, 3.0f, -71.5f);
+            CheckpointRot = new Quaternion(0, -176.27f, 0, 0);
+        }
+        else if(!HalfLapTrig.active && LastLapTrigger && LapCompleteTrig)
+        {
+            CheckPointPos = new Vector3(69.2f, 3.0f, -145.02f);
+            CheckpointRot = new Quaternion(0, -638.954f, 0, 0);
+        }
+        else if(!LastLapTrigger && LapCompleteTrig)
+        {
+            CheckPointPos = new Vector3(90.9f, 3.0f, 158.1f);
+            CheckpointRot = new Quaternion(0, -454.951f, 0, 0);
+        }
+        else if (!LapCompleteTrig)
+        {
+            CheckPointPos = new Vector3(-28.94f, 3.0f, 114.1f);
+            CheckpointRot = new Quaternion(0, -480.355f, 0, 0);
+        }
 
+        transform.position = CheckPointPos;
+        transform.rotation = CheckpointRot;
+    }
 }

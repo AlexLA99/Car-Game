@@ -262,9 +262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lapComplete: {fileID: 575378398}
-  First: {fileID: 0}
-  Half: {fileID: 0}
-  Last: {fileID: 0}
+  First: {fileID: 190334470}
+  Half: {fileID: 1686114260}
+  Last: {fileID: 1407167978}
 --- !u!1001 &25664234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4526,7 +4526,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.539
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4693,9 +4693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f057cf308fc2d1949af00fdf63a14f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 0}
-  view1: {fileID: 0}
-  view2: {fileID: 0}
 --- !u!1 &575378398
 GameObject:
   m_ObjectHideFlags: 0
@@ -6650,9 +6647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f057cf308fc2d1949af00fdf63a14f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 152507397}
-  view1: {fileID: 573333728}
-  view2: {fileID: 0}
 --- !u!1 &819062699
 GameObject:
   m_ObjectHideFlags: 0
@@ -10072,6 +10066,7 @@ MonoBehaviour:
   HalfLapTrig: {fileID: 1686114260}
   FirstLapTrigger: {fileID: 190334470}
   LastLapTrigger: {fileID: 1407167978}
+  car: {fileID: 0}
 --- !u!65 &1407167980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10651,6 +10646,38 @@ PrefabInstance:
       propertyPath: motorForce
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: LapCompleteTrig
+      value: 
+      objectReference: {fileID: 575378398}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: HalfLapTrig
+      value: 
+      objectReference: {fileID: 1686114260}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: FirstLapTrigger
+      value: 
+      objectReference: {fileID: 190334470}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: LastLapTrigger
+      value: 
+      objectReference: {fileID: 1407167978}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckPointPos.x
+      value: -28.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckPointPos.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckPointPos.z
+      value: 114.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckpointRot.y
+      value: -480.355
+      objectReference: {fileID: 0}
     - target: {fileID: 693955430750519579, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -10665,7 +10692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.2
+      value: -13.01
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10673,7 +10700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 123.25
+      value: 123.43
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -10681,7 +10708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.8699185
+      value: 0.86757225
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -10689,7 +10716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.49319547
+      value: -0.4973113
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_RootOrder
@@ -10701,7 +10728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -120.898
+      value: -480.355
       objectReference: {fileID: 0}
     - target: {fileID: 693955431062033901, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -15818,6 +15845,38 @@ PrefabInstance:
       propertyPath: clientCar
       value: 
       objectReference: {fileID: 2109748188}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: FirstLapTrigger
+      value: 
+      objectReference: {fileID: 190334470}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: HalfLapTrig
+      value: 
+      objectReference: {fileID: 1686114260}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: LapCompleteTrig
+      value: 
+      objectReference: {fileID: 575378398}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: LastLapTrigger
+      value: 
+      objectReference: {fileID: 1407167978}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckPointPos.x
+      value: -28.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckPointPos.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckPointPos.z
+      value: 114.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
+      propertyPath: CheckpointRot.y
+      value: -480.355
+      objectReference: {fileID: 0}
     - target: {fileID: 693955431062033897, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: m_Name
       value: SportCar2

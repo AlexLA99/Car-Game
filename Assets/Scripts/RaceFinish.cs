@@ -12,18 +12,14 @@ public class RaceFinish : MonoBehaviour
 
 
     void OnTriggerEnter()
-    {   
-        this.GetComponent<BoxCollider>().enabled = false;
-        CompleteTrig.SetActive(false);
-        CarControls.SetActive(false);
-        FinishCam.SetActive(true);
-        car.motorForce = 0;
-        CarControls.SetActive(true);
-
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
- 
+    {
+       
+            this.GetComponent<BoxCollider>().enabled = false;
+            CompleteTrig.SetActive(false);
+            CarControls.SetActive(false);
+            FinishCam.SetActive(true);
+            car.motorForce = 0;
+            CarControls.SetActive(true);
+       
     }
 }

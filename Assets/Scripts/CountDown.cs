@@ -38,11 +38,11 @@ public class CountDown : MonoBehaviour
         countdown.SetActive(true);
         LapTimer.SetActive(true);
         CarControls.SetActive(true);
-        
+        LevelMusic.Play();
         car.motorForce = 1000f;
         car2.motorForce = 1000f;
         yield return new WaitForSeconds(1);
         countdown.SetActive(false);
-        LevelMusic.Play();
+        
     }
 }
