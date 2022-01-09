@@ -8,12 +8,16 @@ public class FirstPointTrigger : MonoBehaviour
     public GameObject HalfLapTrig;
     public GameObject FirstLapTrigger;
     public GameObject LastLapTrigger;
+    public GameObject car;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.name == car.name)
+        { 
         LapCompleteTrig.SetActive(true);
-        HalfLapTrig.SetActive(false);
+        HalfLapTrig.SetActive(true);
         FirstLapTrigger.SetActive(false);
         LastLapTrigger.SetActive(true);
+        }
     }
 }

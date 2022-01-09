@@ -8,6 +8,7 @@ public class HalfPointTrigger : MonoBehaviour
     public GameObject HalfLapTrig;
     public GameObject FirstLapTrigger;
     public GameObject LastLapTrigger;
+    public GameObject car;
 
     void OnTriggerEnter()
     {

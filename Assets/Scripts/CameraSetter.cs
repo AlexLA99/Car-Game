@@ -5,6 +5,8 @@ using UnityStandardAssets.Cameras;
 
 public class CameraSetter : MonoBehaviour
 {
+    public GameObject lapComplete;
+
     public void SetCar(GameObject car)
     {
         GetComponent<AutoCam>().SetTarget(car.transform);
@@ -14,5 +16,6 @@ public class CameraSetter : MonoBehaviour
         countDown.CarControls = car;
         countDown.car = car.GetComponent<CarMovement>();
         GetComponentInChildren<Speedometer>().target = car.GetComponent<Rigidbody>();
+        lapComplete.GetComponent<LapComplete>().car = car;
     }
 }
