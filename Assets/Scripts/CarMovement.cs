@@ -193,22 +193,22 @@ public class CarMovement : MonoBehaviour
 
         if (!FirstLapTrigger.active && HalfLapTrig.active && LastLapTrigger && LapCompleteTrig)
         {
-            CheckPointPos = new Vector3(-176.68f, 3.0f, -71.5f);
+            CheckPointPos = new Vector3(-176.68f, 4.0f, -71.5f);
             CheckpointRot = new Quaternion(0, -176.27f, 0, 0);
         }
         else if(!HalfLapTrig.active && LastLapTrigger && LapCompleteTrig)
         {
-            CheckPointPos = new Vector3(69.2f, 3.0f, -145.02f);
+            CheckPointPos = new Vector3(69.2f, 4.0f, -145.02f);
             CheckpointRot = new Quaternion(0, -638.954f, 0, 0);
         }
         else if(!LastLapTrigger && LapCompleteTrig)
         {
-            CheckPointPos = new Vector3(90.9f, 3.0f, 158.1f);
+            CheckPointPos = new Vector3(90.9f, 4.0f, 158.1f);
             CheckpointRot = new Quaternion(0, -454.951f, 0, 0);
         }
         else if (!LapCompleteTrig)
         {
-            CheckPointPos = new Vector3(-28.94f, 3.0f, 114.1f);
+            CheckPointPos = new Vector3(-28.94f, 4.0f, 114.1f);
             CheckpointRot = new Quaternion(0, -480.355f, 0, 0);
         }
 
