@@ -10,6 +10,7 @@ public class CountDown : MonoBehaviour
     public GameObject CarControls;
     public CarMovement car;
     public CarMovement car2;
+    public AudioSource LevelMusic;
 
     void Start()
     {
@@ -37,10 +38,11 @@ public class CountDown : MonoBehaviour
         countdown.SetActive(true);
         LapTimer.SetActive(true);
         CarControls.SetActive(true);
+        
         car.motorForce = 1000f;
         car2.motorForce = 1000f;
         yield return new WaitForSeconds(1);
         countdown.SetActive(false);
-
+        LevelMusic.Play();
     }
 }
