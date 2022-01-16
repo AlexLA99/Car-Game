@@ -10,14 +10,22 @@ public class CameraSetter : MonoBehaviour
     public GameObject Half;
     public GameObject Last;
 
-    public void SetCar(GameObject car)
+    public void SetCar(GameObject car, int id)
     {
-
+        if (id == 1)
+        {
+            car = GameObject.Find("SportCar1(Clone)");
+           
+        }
+        else
+        {
+            car = GameObject.Find("SportCar2(Clone)");
+        }
         GetComponent<AutoCam>().SetTarget(car.transform);
         //GetComponent<RaceFinish>().car = car.GetComponent<CarMovement>();
         //GetComponent<RaceFinish>().CarControls = car;
         CountDown countDown = GetComponentInChildren<CountDown>(true);
-        countDown.CarControls = car;
+        //countDown.CarControls = car;
         countDown.car = car.GetComponent<CarMovement>();
         GetComponentInChildren<Speedometer>().target = car.GetComponent<Rigidbody>();
         lapComplete.GetComponent<LapComplete>().car = car;

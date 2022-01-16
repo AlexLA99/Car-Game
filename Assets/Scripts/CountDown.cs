@@ -7,7 +7,6 @@ public class CountDown : MonoBehaviour
 {
     public GameObject countdown;
     public GameObject LapTimer;
-    public GameObject CarControls;
     public CarMovement car;
     public CarMovement car2;
     public AudioSource LevelMusic;
@@ -37,7 +36,6 @@ public class CountDown : MonoBehaviour
         countdown.GetComponent<Text>().text = "GO";
         countdown.SetActive(true);
         LapTimer.SetActive(true);
-        CarControls.SetActive(true);
         LevelMusic.Play();
         car.motorForce = 1000f;
         car2.motorForce = 1000f;

@@ -4,16 +4,16 @@ using UnityEngine;
 using Photon.Pun;
 using System.Threading;
 using Assets.Networking;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     PhotonView PV;
-    public CameraSetter CameraSetter;
+    
     public CarMovement[] Cars = new CarMovement[2];
     public CarMovement.PassInfo car1Info;
     public CarMovement.PassInfo car2Info;
 
-    public int playerId = 0;
 
 
     private void Awake()
@@ -24,9 +24,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerId = PhotonNetwork.LocalPlayer.ActorNumber;
-        CameraSetter.SetCar(Cars[playerId-1].gameObject);
+        if (PV.IsMine)
+        {
+            CreateController();
+        }
+        
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -37,11 +42,30 @@ public class GameManager : MonoBehaviour
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
-            stream.SendNext(Cars[playerId-1].data);
+            stream.SendNext(Cars[PhotonNetwork.LocalPlayer.ActorNumber - 1].data);
 
-        else if (playerId == 1)
+        else if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
             Cars[1].serverData = (byte[])stream.ReceiveNext();
         else
             Cars[0].serverData = (byte[])stream.ReceiveNext();
+    }
+
+    private void CreateController()
+    {
+        int i = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        GameObject spawn = GameObject.Find("Spawn1");
+
+        switch (i)
+        {
+            case 1:
+                spawn = GameObject.Find("Spawn1");
+                break;
+            case 2:
+                spawn = GameObject.Find("Spawn2");
+                break;
+        }
+
+        spawn.gameObject.GetComponent<CarSpawner>().SpawnCar(i, Cars);
     }
 }
