@@ -66,6 +66,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        spawn.gameObject.GetComponent<CarSpawner>().SpawnCar(i, Cars);
+        spawn.gameObject.GetComponent<CarSpawner>().SpawnCar(i);
     }
 }

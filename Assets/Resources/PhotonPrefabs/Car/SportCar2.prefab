@@ -383,7 +383,7 @@ MonoBehaviour:
     rearLeftWheelTransform: {fileID: 1068685453807962487}
     rearRightWheelTransform: {fileID: 1068685454202745324}
   maxSteeringAngle: 30
-  motorForce: 0
+  motorForce: 1000
   brakeForce: 300
   clientCar: {fileID: 585700040688468829, guid: c0c3c8438d48ce045b6e1d7cf5f0237f, type: 3}
   data: 

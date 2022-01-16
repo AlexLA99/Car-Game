@@ -10,8 +10,9 @@ public class CameraSetter : MonoBehaviour
     public GameObject Half;
     public GameObject Last;
 
-    public void SetCar(GameObject car, int id)
+    public void SetCar(int id)
     {
+        GameObject car;
         if (id == 1)
         {
             car = GameObject.Find("SportCar1(Clone)");

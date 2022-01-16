@@ -13,7 +13,7 @@ public class CarSpawner : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
     }
 
-    public void SpawnCar(int playerNumber, CarMovement[] Cars)
+    public void SpawnCar(int playerNumber)
     {
         GameObject sp1 = GameObject.Find("Spawn1");
         GameObject sp2 = GameObject.Find("Spawn2");
@@ -29,6 +29,6 @@ public class CarSpawner : MonoBehaviour
 
 
         }
-        CameraSetter.SetCar(Cars[PhotonNetwork.LocalPlayer.ActorNumber - 1].gameObject, PhotonNetwork.LocalPlayer.ActorNumber);
+        CameraSetter.SetCar(PhotonNetwork.LocalPlayer.ActorNumber);
     }
 }

@@ -52,7 +52,7 @@ public class Client_Test : MonoBehaviour
     {
         if (needsConnect)
         {
-            CameraSetter.SetCar(Cars[playerId - 1].gameObject, 1);
+            //CameraSetter.SetCar(Cars[playerId - 1].gameObject, 1);
             needsConnect = false;
         }
         bool quitting = false;
