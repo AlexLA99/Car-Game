@@ -995,8 +995,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 152507404}
   - {fileID: 152507403}
+  - {fileID: 152507404}
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -15922,7 +15922,7 @@ PrefabInstance:
     - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: clientCar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2109748189}
     - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: FirstLapTrigger
       value: 
@@ -16125,8 +16125,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 693955430745553080}
   - {fileID: 693955430745553079}
+  - {fileID: 693955430745553080}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
