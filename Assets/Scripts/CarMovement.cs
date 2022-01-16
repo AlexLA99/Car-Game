@@ -100,12 +100,12 @@ public class CarMovement : MonoBehaviour
             ClientData = fromBytes(serverData);
         }
         ++positionCountDown;
-        if (positionCountDown >= 10 && PhotonNetwork.LocalPlayer.ActorNumber != carInfo.carId && ClientData.carId == carInfo.carId)
-        {
-            transform.rotation = new Quaternion(ClientData.carTransformRotX, ClientData.carTransformRotY, ClientData.carTransformRotZ, ClientData.carTransformRotW);
-            transform.position = new Vector3(ClientData.carTransformX, ClientData.carTransformY, ClientData.carTransformZ);
-            positionCountDown = 0;
-        }
+        //if (positionCountDown >= 10 && PhotonNetwork.LocalPlayer.ActorNumber != carInfo.carId && ClientData.carId == carInfo.carId)
+        //{
+        //    transform.rotation = new Quaternion(ClientData.carTransformRotX, ClientData.carTransformRotY, ClientData.carTransformRotZ, ClientData.carTransformRotW);
+        //    transform.position = new Vector3(ClientData.carTransformX, ClientData.carTransformY, ClientData.carTransformZ);
+        //    positionCountDown = 0;
+        //}
     }
 
     private void FixedUpdate()
@@ -199,12 +199,12 @@ public class CarMovement : MonoBehaviour
     public void LastCheckpoint()
     {
 
-        if (!FirstLapTrigger.active && HalfLapTrig.active && LastLapTrigger && LapCompleteTrig)
+        if (!FirstLapTrigger && HalfLapTrig && LastLapTrigger && LapCompleteTrig)
         {
             CheckPointPos = new Vector3(-176.68f, 4.0f, -71.5f);
             CheckpointRot = new Quaternion(0, -176.27f, 0, 0);
         }
-        else if(!HalfLapTrig.active && LastLapTrigger && LapCompleteTrig)
+        else if(!HalfLapTrig && LastLapTrigger && LapCompleteTrig)
         {
             CheckPointPos = new Vector3(69.2f, 4.0f, -145.02f);
             CheckpointRot = new Quaternion(0, -638.954f, 0, 0);
