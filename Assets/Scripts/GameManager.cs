@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
             stream.SendNext(Cars[playerId-1].data);
 
         else if (playerId == 1)
-            Cars[2].serverData = (byte[])stream.ReceiveNext();
-        else
             Cars[1].serverData = (byte[])stream.ReceiveNext();
+        else
+            Cars[0].serverData = (byte[])stream.ReceiveNext();
     }
 }
