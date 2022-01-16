@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public CarMovement.PassInfo car1Info;
     public CarMovement.PassInfo car2Info;
 
-    public int playerId;
+    public int playerId = 0;
 
     
 
@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     {
         playerId = PhotonNetwork.LocalPlayer.ActorNumber;
         CameraSetter.SetCar(Cars[playerId-1].gameObject);
-
     }
 
     // Update is called once per frame

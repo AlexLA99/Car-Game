@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using Photon.Pun;
 
 public class CarMovement : MonoBehaviour
 {
@@ -60,13 +61,21 @@ public class CarMovement : MonoBehaviour
     
     PassInfo ClientData;
 
+    [HideInInspector]
     public byte[] data;
+    [HideInInspector]
     public byte[] serverData;
+
+
+    private void Start()
+    {
+        passInfo.carId = carInfo.carId;
+    }
 
     void Update()
     {
 
-        if (clientCar.playerId == carInfo.carId && Input.GetKey(KeyCode.R))
+        if (PhotonNetwork.LocalPlayer.ActorNumber == carInfo.carId && Input.GetKey(KeyCode.R))
         {
             LastCheckpoint();
         }
@@ -82,7 +91,6 @@ public class CarMovement : MonoBehaviour
         passInfo.carTransformRotW = transform.rotation.w;
 
 
-        passInfo.carId = carInfo.carId;
 
 
         data = getBytes(passInfo);
@@ -92,7 +100,7 @@ public class CarMovement : MonoBehaviour
             ClientData = fromBytes(serverData);
         }
         ++positionCountDown;
-        if (positionCountDown >= 10 && clientCar.playerId != carInfo.carId && ClientData.carId == carInfo.carId)
+        if (positionCountDown >= 10 && PhotonNetwork.LocalPlayer.ActorNumber != carInfo.carId && ClientData.carId == carInfo.carId)
         {
             transform.rotation = new Quaternion(ClientData.carTransformRotX, ClientData.carTransformRotY, ClientData.carTransformRotZ, ClientData.carTransformRotW);
             transform.position = new Vector3(ClientData.carTransformX, ClientData.carTransformY, ClientData.carTransformZ);
@@ -110,7 +118,7 @@ public class CarMovement : MonoBehaviour
 
     private void GetInput()
     {
-        if (clientCar.playerId == carInfo.carId)
+        if (PhotonNetwork.LocalPlayer.ActorNumber == carInfo.carId)
         {
             passInfo.horizontalInput = Input.GetAxis("Horizontal");
             passInfo.verticalInput = Input.GetAxis("Vertical");
