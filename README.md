@@ -22,7 +22,7 @@ Race against your friends in this fast-paced multiplayer racing game!
 ## How to play
 
 If in unity: Open the scene "Assets\Networking\LobyScene" and press the play button
-To download a build use this link: 
+To download a build use this link: [Crazy Cars Build](https://github.com/AlexLA99/Car-Game/releases/tag/1.0)
 
 First, you will need to enter your name. Then, you can either create a room, join a random room or search for a specific room. Once all your friends have joined the room and clicked ready, the game will start! The first to complete 2 laps wins!
 
