@@ -6,12 +6,10 @@ using Photon.Pun;
 
 public class Manager : MonoBehaviour
 {
-    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    void Awake()
     {
-        if (scene.buildIndex == 1)
-        {
-            PhotonNetwork.Instantiate("PhotonPrefabs/GameManager", Vector3.zero, Quaternion.identity);
-            PhotonNetwork.Instantiate("PhotonPrefabs/GameManager", Vector3.zero, Quaternion.identity);
-        }
+        
+        PhotonNetwork.Instantiate("PhotonPrefabs/Client", Vector3.zero, Quaternion.identity);
+        
     }
 }
