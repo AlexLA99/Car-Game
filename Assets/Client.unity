@@ -2667,7 +2667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &329755882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5650,7 +5650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &700425831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10641,7 +10641,7 @@ PrefabInstance:
     - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: clientCar
       value: 
-      objectReference: {fileID: 2109748188}
+      objectReference: {fileID: 2109748189}
     - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: motorForce
       value: 0
@@ -14148,7 +14148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1991958487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15262,6 +15262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109748187}
   - component: {fileID: 2109748188}
+  - component: {fileID: 2109748189}
   m_Layer: 0
   m_Name: Client
   m_TagString: Untagged
@@ -15290,7 +15291,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109748186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a91f5258bb64c8246981f4756d099368, type: 3}
   m_Name: 
@@ -15303,6 +15304,23 @@ MonoBehaviour:
   countDownScript: {fileID: 329755881}
   waitingPlayers: {fileID: 700425830}
   countDownUI: {fileID: 1991958486}
+  playerId: 0
+--- !u!114 &2109748189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109748186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d873d2f654001a14f9dfd1ad7ebb9c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraSetter: {fileID: 24926413}
+  Cars:
+  - {fileID: 152507398}
+  - {fileID: 1735405543}
   playerId: 0
 --- !u!1001 &2112682898
 PrefabInstance:
@@ -15844,7 +15862,7 @@ PrefabInstance:
     - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: clientCar
       value: 
-      objectReference: {fileID: 2109748188}
+      objectReference: {fileID: 0}
     - target: {fileID: 995279493, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
       propertyPath: FirstLapTrigger
       value: 

@@ -56,7 +56,7 @@ public class CarMovement : MonoBehaviour
     public float maxSteeringAngle = 30f;
     public float motorForce = 50f;
     public float brakeForce = 0f;
-    public Client_Test clientCar;
+    public GameManager clientCar;
     
     PassInfo ClientData;
 
@@ -65,8 +65,8 @@ public class CarMovement : MonoBehaviour
 
     void Update()
     {
-        
-        if (Input.GetKey(KeyCode.R))
+
+        if (clientCar.playerId == carInfo.carId && Input.GetKey(KeyCode.R))
         {
             LastCheckpoint();
         }
