@@ -1,20 +1,62 @@
-- Team members: Victor Nisa, Alex Lopez, Daniel Ruiz
+# Crazy Cars
 
-- Crazy cars: This is a racing game which 2 players will compete against them in a lake circuit. 
+## Game Description
 
-- Instructions: 
-W --> Accelerate
-A --> Turn left
-D --> Turn right
-S --> Break
-SPACE --> in case of a crash, it fixes it.
+Race against your friends in this fast-paced multiplayer racing game!
 
-In order to start, open the scene Client and the scene Networking/NetworkServerTest in additive. The second Client can be a Build (we have one already created in Build folder)
+## Members
 
-- Work: 	
-	Daniel --> Helping to fix the problems between connections
-	Alex --> Sending vehicle data to the server and back
-	Victor --> UDP connection between client and server, tried to add join and leave events but they are still a work in progress
+- [Victor Nisa](https://github.com/VictorNisa)
+- [Alex Lopez](https://github.com/AlexLA99)
+- [Daniel Ruiz](https://github.com/xsiro)
+
+## Controls
+
+- W --> Accelerate
+- A --> Turn left
+- D --> Turn right
+- S --> Break
+- R --> Return to last checkpoint
+- SPACEBAR --> Brakes
+
+## How to play
+
+First, you will need to enter your name. Then, you can either create a room, join a random room or search for a specific room. Once all your friends have joined the room and clicked ready, the game will start! The first to complete 2 laps wins!
+
+## Net Work
+- Daniel --> QA and bugfix
+- Alex --> PUN gameplay implementation
+- Victor --> PUN server setup / lobby creation 
+
+## Features and possible improvements
+
+### Gameplay
+
+- Polished gameplay with checkpoint system
+- Minimap
+- Finish scene
+- Audio
+
+### Networking
+
+- PUN server implementation
+- Lag mitigation (shortened the amount of network calls from last delivery)
+
+### What we could improve
+
+- Lobby is too basic
+- Lag mitigation could still be more optimized (path prediction)
+- UI bugfixes
+- More than 2 player gameplay
+
+## Previous delivery work
+
+- Daniel --> Helping to fix the problems between connections
+- Alex --> Sending vehicle data to the server and back
+- Victor --> UDP connection between client and server, tried to add join and leave events but they are still a work in progress
+
+## Previous delivery features and possible improvements
+
 - The velocimeter works right as the UI
 	The car has some problems but works correctly
 	Colliders work fine
