@@ -7,6 +7,7 @@ using Assets.Networking;
 
 public class GameManager : MonoBehaviour
 {
+    PhotonView PV;
     public CameraSetter CameraSetter;
     public CarMovement[] Cars = new CarMovement[2];
     public CarMovement.PassInfo car1Info;
@@ -14,7 +15,11 @@ public class GameManager : MonoBehaviour
 
     public int playerId = 0;
 
-    
+
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     // Start is called before the first frame update
     void Start()
