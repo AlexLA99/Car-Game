@@ -16,10 +16,13 @@ Race against your friends in this fast-paced multiplayer racing game!
 - A --> Turn left
 - D --> Turn right
 - S --> Break
-- R --> Return to last checkpoint
+- R --> Restart lap (only position not time)
 - SPACEBAR --> Brakes
 
 ## How to play
+
+If in unity: Open the scene "Assets\Networking\LobyScene" and press the play button
+To download a build use this link: 
 
 First, you will need to enter your name. Then, you can either create a room, join a random room or search for a specific room. Once all your friends have joined the room and clicked ready, the game will start! The first to complete 2 laps wins!
 
