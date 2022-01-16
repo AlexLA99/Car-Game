@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 585700040688468827}
-  - component: {fileID: 585700040688468828}
   - component: {fileID: 585700040688468829}
   - component: {fileID: 585700040688468830}
   m_Layer: 0
@@ -33,27 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &585700040688468828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585700040688468826}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a91f5258bb64c8246981f4756d099368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OutputLog: {fileID: 0}
-  Cars:
-  - {fileID: 6672151734687650666, guid: 01b856e44258ccc449524f61cde18b27, type: 3}
-  - {fileID: 537572175415847880, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-  CameraSetter: {fileID: 0}
-  countDownScript: {fileID: 0}
-  waitingPlayers: {fileID: 0}
-  countDownUI: {fileID: 0}
-  playerId: 0
 --- !u!114 &585700040688468829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d873d2f654001a14f9dfd1ad7ebb9c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraSetter: {fileID: 0}
   Cars:
   - {fileID: 6672151734687650666, guid: 01b856e44258ccc449524f61cde18b27, type: 3}
   - {fileID: 537572175415847880, guid: d98ed5f33152a1d40ac77cf55714f68b, type: 3}
-  playerId: 0
 --- !u!114 &585700040688468830
 MonoBehaviour:
   m_ObjectHideFlags: 0
