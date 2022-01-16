@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
-using Photon.Pun;
 
 public class CarMovement : MonoBehaviour
 {
@@ -18,16 +17,6 @@ public class CarMovement : MonoBehaviour
 
     public Vector3 CheckPointPos;
     public Quaternion CheckpointRot;
-
-    PhotonView PV;
-
-    public void Awake()
-    {
-        //m_Rigidbody = GetComponent<Rigidbody>();
-        PV = GetComponent<PhotonView>();
-    }
-
-
 
     [System.Serializable]
     [StructLayout(LayoutKind.Sequential)]
@@ -68,28 +57,11 @@ public class CarMovement : MonoBehaviour
     public float motorForce = 50f;
     public float brakeForce = 0f;
     public Client_Test clientCar;
-
+    
     PassInfo ClientData;
-
-    private void OnEnable()
-    {
-        // TODO
-    }
-
-    private void OnDisable()
-    {
-        // TODO
-    }
 
     public byte[] data;
     public byte[] serverData;
-
-    public void Start()
-    {
-        PV = GetComponent<PhotonView>();
-
-        PV.Owner.TagObject = gameObject;
-    }
 
     void Update()
     {
@@ -99,7 +71,6 @@ public class CarMovement : MonoBehaviour
             LastCheckpoint();
         }
         
-
 
         passInfo.carTransformX = transform.position.x;
         passInfo.carTransformY = transform.position.y;
@@ -111,10 +82,10 @@ public class CarMovement : MonoBehaviour
         passInfo.carTransformRotW = transform.rotation.w;
 
 
-        //passInfo.carId = carInfo.carId;
+        passInfo.carId = carInfo.carId;
 
 
-        //data = getBytes(passInfo);
+        data = getBytes(passInfo);
 
         if (serverData != null && serverData.Length != 0)
         {
@@ -126,12 +97,6 @@ public class CarMovement : MonoBehaviour
             transform.rotation = new Quaternion(ClientData.carTransformRotX, ClientData.carTransformRotY, ClientData.carTransformRotZ, ClientData.carTransformRotW);
             transform.position = new Vector3(ClientData.carTransformX, ClientData.carTransformY, ClientData.carTransformZ);
             positionCountDown = 0;
-        }
-
-        if (PV.IsMine)
-        {
-            passInfo.carId = carInfo.carId;
-            data = getBytes(passInfo);
         }
     }
 
